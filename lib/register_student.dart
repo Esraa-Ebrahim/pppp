@@ -38,30 +38,6 @@ class _register_studentState extends State<register_student> {
       ]);
 }
 
-  Widget _entryField(String title, {bool isPassword = false}) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextField(
-              obscureText: isPassword,
-              decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    );
-  }
-
   Widget _submitButton() {
     return Container(
       height: 60,
@@ -123,16 +99,10 @@ class _register_studentState extends State<register_student> {
     );
   }
 
-  Widget _sizedbox2() {
-    return SizedBox(
-      height: 30,
-    );
-  }
-
   Widget _title() {
     return Container(
       child: Image.asset('assetss/now.png'),
-
+      height: 270,
     );
   }
 
@@ -163,6 +133,23 @@ class _register_studentState extends State<register_student> {
         SizedBox(
           height: 10,
         ),
+        TextField(
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  College Code',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
+        ),
+        SizedBox(
+          height: 10,
+        ),
 
         TextField(
           keyboardType: TextInputType.number,
@@ -184,40 +171,8 @@ class _register_studentState extends State<register_student> {
         ),
 
         TextField(
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
-                  icon: Icon(Icons.arrow_drop_down_circle_rounded,
-                      color: Color(0xff1f7a8c)),
-                  value: selectedValue,
-                  items: [
-                    DropdownMenuItem(
-                      child: Text("1   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 1,
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "2", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
-                    ),
-                    DropdownMenuItem(
-                      child: Text("3   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 3,
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "4   ", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 4,
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value!;
-                    });
-                  }),
               filled: true,
               fillColor: Color(0xffededed),
               border: OutlineInputBorder(
@@ -230,6 +185,23 @@ class _register_studentState extends State<register_student> {
               )),
         ),
 
+        SizedBox(
+          height: 10,
+        ),
+        TextField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  Section Number',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
+        ),
         SizedBox(
           height: 10,
         ),
@@ -254,14 +226,12 @@ class _register_studentState extends State<register_student> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: SingleChildScrollView(
                   child: Column(
-                  //  crossAxisAlignment: CrossAxisAlignment.center,
-                  //  mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(height: height * .1),
+                      SizedBox(height: height * .05),
                       _backButton(),
-                      _sizedbox2(),
                       _title(),
-                      _sizedbox(),
                       _academycode(),
                       _submitButton(),
                       _loginAccountLabel(),

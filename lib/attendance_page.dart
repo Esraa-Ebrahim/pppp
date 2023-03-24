@@ -1,11 +1,6 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'home_Screen.dart';
-import 'package:local_auth_ios/local_auth_ios.dart';
-import 'package:local_auth/error_codes.dart' as auth_error;
-import 'package:local_auth/local_auth.dart';
-import 'Shared/LocationService.dart';
+import 'package:geolocator/geolocator.dart';
 
 class attendance_page extends StatefulWidget {
   const attendance_page({Key? key}) : super(key: key);
@@ -15,33 +10,21 @@ class attendance_page extends StatefulWidget {
 }
 
 class _attendance_pageState extends State<attendance_page> {
-  LocationData? slocation;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final LocalAuthentication auth = LocalAuthentication();
-    String _message = 'Not authenticated';
+    var locationMessage = "";
+    void getCurrentLocation() async {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+          var lat = position.latitude;
+          var long = position.longitude;
+          print ("$lat , $long ");
 
-    Future<void> _authenticate() async {
-      bool authenticated = false;
-      try {
-        authenticated = await auth.authenticate(
-          localizedReason: 'Please authenticate to continue',
-        );
-      } catch (e) {
-        print(e);
-      }
-
-      if (authenticated) {
-        setState(() {
-          _message = 'Authenticated';
-        });
-      } else {
-        setState(() {
-          _message = 'Not authenticated';
-        });
-      }
+          setState(() {
+            locationMessage = "Latitude : $lat , Longtiude : $long";
+          });
     }
 
     return Scaffold(
@@ -107,7 +90,8 @@ class _attendance_pageState extends State<attendance_page> {
                         color: Color.fromARGB(255, 255, 255, 255),
                         iconSize: screenHeight * 0.05,
                         onPressed: () async {
-                          slocation = await getMyLocation();
+                          getCurrentLocation();
+                          print("position :$locationMessage");
                         },
                         icon: Icon(Icons.location_on),
                       ),
@@ -133,7 +117,7 @@ class _attendance_pageState extends State<attendance_page> {
               child: IconButton(
                 color: Color.fromRGBO(31, 122, 140, 1.0),
                 iconSize: screenWidth * 0.2,
-                onPressed: _authenticate,
+                onPressed: () async {},
                 icon: Icon(Icons.fingerprint),
               ),
             ),
@@ -177,12 +161,5 @@ class _attendance_pageState extends State<attendance_page> {
         ),
       ),
     );
-  }
-
-  Future<LocationData> getMyLocation() async {
-    final service = LocationService();
-    final locationData = await service.getLocation();
-
-    return locationData!;
   }
 }

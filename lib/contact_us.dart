@@ -119,7 +119,7 @@ class ContactUs extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              launch('https://github.com/LoaaElsayed/graduation-flutter');
+              launch('https://github.com/LoaaElsayed/flutter');
             },
             child: Text(
               'Click to get Front-end code',
