@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:local_auth_ios/local_auth_ios.dart';
-import 'package:local_auth/error_codes.dart' as auth_error;
-import 'package:local_auth/local_auth.dart';
+
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -15,29 +13,6 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  final LocalAuthentication auth = LocalAuthentication();
-  String _message = 'Not authenticated';
-
-  Future<void> _authenticate() async {
-    bool authenticated = false;
-    try {
-      authenticated = await auth.authenticate(
-        localizedReason: 'Please authenticate to continue',
-      );
-    } catch (e) {
-      print(e);
-    }
-
-    if (authenticated) {
-      setState(() {
-        _message = 'Authenticated';
-      });
-    } else {
-      setState(() {
-        _message = 'Not authenticated';
-      });
-    }
-  }
 
   TextEditingController _phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -378,18 +353,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  Widget _fingerprint() {
-    return InkWell(
-      onTap: () async {
-        _authenticate;
-      },
-      child: Container(
-        child: Image.asset('assetss/fingerprint1.png'),
-        height: 150,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     //final height = MediaQuery.of(context).size.height;
@@ -415,7 +378,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     _backButton(),
                     _title(),
                     _emailPasswordWidget(),
-                    _fingerprint(),
                     _submitButton(),
                     _loginAccountLabel(),
                   ],
