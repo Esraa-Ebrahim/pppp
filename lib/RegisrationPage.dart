@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:local_auth_ios/local_auth_ios.dart';
-import 'package:local_auth/error_codes.dart' as auth_error;
-import 'package:local_auth/local_auth.dart';
+
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -15,29 +13,17 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  final LocalAuthentication auth = LocalAuthentication();
-  String _message = 'Not authenticated';
+  var selectedValue1 =1;
+  var selectedValue2 =1;
+  var selectedValue3 =1;
+  var selectedValue4 =1;
+  var selectedValue5 =1;
+  var selectedValue6 =1;
+  var selectedValue7 =1;
+  int selectedValue = 1;
 
-  Future<void> _authenticate() async {
-    bool authenticated = false;
-    try {
-      authenticated = await auth.authenticate(
-        localizedReason: 'Please authenticate to continue',
-      );
-    } catch (e) {
-      print(e);
-    }
-
-    if (authenticated) {
-      setState(() {
-        _message = 'Authenticated';
-      });
-    } else {
-      setState(() {
-        _message = 'Not authenticated';
-      });
-    }
-  }
+  ImagePicker picker = ImagePicker();
+  XFile? image;
 
   TextEditingController _phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -55,10 +41,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       });
     }
   }
-
-  ImagePicker picker = ImagePicker();
-  XFile? image;
-  int selectedValue = 1;
 
   Widget _backButton() {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -225,168 +207,143 @@ class _RegistrationPageState extends State<RegistrationPage> {
               filled: true,
               fillColor: Color(0xffededed),
               border: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xffededed)),
-                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide(color: Color(0xff0a3f4f), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
               ),
-              hintText: 'Full Name',
-              prefixIcon: Icon(Icons.abc),
+              hintText: '  Your Name',
               hintStyle: TextStyle(
-                  color: Color(0xff0a3f4f).withOpacity(0.5), fontSize: 20)),
+                color: Color(0xff0a3f4f),
+              )),
         ),
         SizedBox(
-          height: 20.0,
+          height: 10,
+        ),
+
+        TextField(
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  College Code',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
+        ),
+        SizedBox(
+          height: 10,
         ),
         TextField(
-          obscureText: isSeen,
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
-            filled: true,
-            fillColor: Color(0xffededed),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffededed)),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            hintText: 'Ntional ID',
-            prefixIcon: Icon(Icons.badge),
-          ),
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  National ID: 14 Number',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
         ),
         SizedBox(
-          height: 20.0,
+          height: 10,
+        ),
+        TextFormField(
+          // enabled: false,
+          keyboardType: TextInputType.none,
+          decoration: InputDecoration(
+            //      suffixText: 'choose file',
+              suffixIcon: IconButton(
+                icon: Icon(Icons.image, color: Color(0xff1f7a8c)),
+                onPressed: () async {
+                  image = await picker.pickImage(source: ImageSource.gallery);
+                  image == null ? Container() :
+                  Image.file(File(image!.path));
+                  setState(() {},);
+                },
+              ),
+              filled: true,
+              suffixIconColor: Color(0xff0a3f4f),
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff0a3f4f), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  Your Image',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
+        ),
+        image == null ? Container() :
+        Image.file(File(image!.path)),
+        SizedBox(
+          height: 10,
         ),
         TextField(
-          obscureText: isSeen,
+          keyboardType: TextInputType.none,
           decoration: InputDecoration(
-            filled: true,
-            fillColor: Color(0xffededed),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffededed)),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            hintText: 'College Code',
-            prefixIcon: Icon(Icons.school),
-          ),
+              suffixIcon:
+              DropdownButton(
+                  icon: Icon(Icons.arrow_drop_down_circle_rounded,
+                      color: Color(0xff1f7a8c)),
+                  value: selectedValue2,
+                  items: const [
+                    DropdownMenuItem(
+                      child: Text("CS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      value: 1,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        "IS  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                      value: 2   ,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("IT  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      value: 3,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        "DS  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                      value: 4,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        "MI  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                      value: 5,
+                    ),
+                    DropdownMenuItem(
+                      child: Text(
+                        "AI  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                      value: 6,
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue2 = value!;
+                    });
+                  }),
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  Department',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
         ),
         SizedBox(
-          height: 20.0,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () async {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("Select image from"),
-                        actions: <Widget>[
-                          TextButton(
-                            child: Text("Gallery"),
-                            onPressed: () async {
-                              image = (await picker.getImage(
-                                  source: ImageSource.gallery)) as XFile?;
-                              setState(() {});
-                              Navigator.pop(context);
-                            },
-                          ),
-                          TextButton(
-                            child: Text("Camera"),
-                            onPressed: () async {
-                              image = (await picker.getImage(
-                                  source: ImageSource.camera)) as XFile?;
-                              setState(() {});
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: TextFormField(
-                  enabled: false,
-                  keyboardType: TextInputType.none,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Color(0xffededed),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffededed)),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    hintText: 'Select Your Image',
-                    hintStyle: TextStyle(
-                      color: Color(0xff0a3f4f),
-                    ),
-                    suffixIcon: Icon(Icons.image, color: Color(0xff1f7a8c)),
-                  ),
-                ),
-              ),
-            ),
-            image == null ? Container() : Image.file(File(image!.path)),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: DropdownButtonFormField<int>(
-                value: selectedValue,
-                items: [
-                  DropdownMenuItem<int>(
-                    child: Text('Department'),
-                    value: null,
-                  ),
-                  DropdownMenuItem<int>(
-                    child: Text('IS'),
-                    value: 1,
-                  ),
-                  DropdownMenuItem<int>(
-                    child: Text('IT'),
-                    value: 2,
-                  ),
-                  DropdownMenuItem<int>(
-                    child: Text('CS'),
-                    value: 3,
-                  ),
-                  DropdownMenuItem<int>(
-                    child: Text('MI'),
-                    value: 4,
-                  ),
-                  DropdownMenuItem<int>(
-                    child: Text('AI'),
-                    value: 5,
-                  ),
-                ],
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color(0xffededed),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xffededed)),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    selectedValue = value!;
-                  });
-                },
-              ),
-            ),
-          ],
+          height: 10,
         ),
       ],
-    );
-  }
-
-  Widget _fingerprint() {
-    return InkWell(
-      onTap: () async {
-        _authenticate;
-      },
-      child: Container(
-        child: Image.asset('assetss/fingerprint1.png'),
-        height: 150,
-      ),
     );
   }
 
@@ -415,7 +372,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     _backButton(),
                     _title(),
                     _emailPasswordWidget(),
-                    _fingerprint(),
                     _submitButton(),
                     _loginAccountLabel(),
                   ],
