@@ -5,14 +5,18 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:permission_handler/permission_handler.dart';
 
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+
   var selectedValue1 =1;
   var selectedValue2 =1;
   var selectedValue3 =1;
@@ -39,6 +43,41 @@ class _RegistrationPageState extends State<RegistrationPage> {
       setState(() {
         isSignIn = false;
       });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await requestLocationPermission(context);
+    });
+  }
+
+  Future<void> requestLocationPermission(BuildContext context) async {
+    var status = await Permission.location.request();
+    if (status.isDenied) {
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Location Permission'),
+          content: const Text(
+              'This app needs access to your location to track attendance.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => openAppSettings(),
+              child: const Text('Settings'),
+            ),
+          ],
+        ),
+      );
+      // الصلاحية مرفوضة للأبد
+    } else if (status.isGranted) {
+      // الصلاحية ممنوحة
     }
   }
 
