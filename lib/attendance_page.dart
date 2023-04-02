@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'home_Screen.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:attendane_app/services/finger_print.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class attendance_page extends StatefulWidget {
   const attendance_page({Key? key}) : super(key: key);
@@ -10,23 +12,54 @@ class attendance_page extends StatefulWidget {
 }
 
 class _attendance_pageState extends State<attendance_page> {
+
+  final double collegeLatitude = 30.586811736415804; // خط العرض للكلية
+  final double collegeLongitude = 31.52454322320364; // خط الطول للكلية
+  final double maxDistance = 500.0; // المسافة القصوى بين موقع المستخدم وموقع الكلية بالأمتار
+
+  bool _isPresent = false;
+  String _locationStatus = "";
+
   @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    var locationMessage = "";
-    void getCurrentLocation() async {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-          var lat = position.latitude;
-          var long = position.longitude;
-          print ("$lat , $long ");
+  void initState() {
+    super.initState();
+    _determinePosition();
+  }
 
-          setState(() {
-            locationMessage = "Latitude : $lat , Longtiude : $long";
-          });
+  Future<void> _determinePosition() async {
+    Position position = await Geolocator.getCurrentPosition();
+
+      double distanceInMeters = await Geolocator.distanceBetween(
+      position.latitude,
+      position.longitude,
+        collegeLatitude,
+        collegeLongitude,
+    );
+    if(distanceInMeters <= 500){
+      print("attended");
+      _isPresent = true;
+    }else{
+      _isPresent = false;
+      print("not attended");
+      print(position.longitude);
+      print(position.latitude);
     }
+        }
 
+  final FingerPrint _fingerPrint = FingerPrint();
+  final FlutterSecureStorage _flutterSecureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true));
+  String fprint = "";
+
+  void checkIfFingerPrientEnable() async {
+    fprint = await _flutterSecureStorage.read(key: "fingerprint") ?? "";
+    setState(() {});
+  }
+
+    @override
+    Widget build(BuildContext context) {
+      final screenWidth = MediaQuery.of(context).size.width;
+      final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -90,8 +123,7 @@ class _attendance_pageState extends State<attendance_page> {
                         color: Color.fromARGB(255, 255, 255, 255),
                         iconSize: screenHeight * 0.05,
                         onPressed: () async {
-                          getCurrentLocation();
-                          print("position :$locationMessage");
+                          _determinePosition();
                         },
                         icon: Icon(Icons.location_on),
                       ),
@@ -117,7 +149,9 @@ class _attendance_pageState extends State<attendance_page> {
               child: IconButton(
                 color: Color.fromRGBO(31, 122, 140, 1.0),
                 iconSize: screenWidth * 0.2,
-                onPressed: () async {},
+                onPressed: () async {
+                  _fingerPrintLogin();
+                },
                 icon: Icon(Icons.fingerprint),
               ),
             ),
@@ -131,27 +165,28 @@ class _attendance_pageState extends State<attendance_page> {
             SizedBox(
               height: screenHeight * 0.1,
             ),
-            Container(
-              height: 60,
-              width: 170,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Color.fromRGBO(31, 122, 140, 1.0),
-              ),
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => home_Screen()));
-                },
-                child: Text(
-                  'Confirm',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                      color: Colors.white),
+            if (fprint.isNotEmpty)
+              Container(
+                height: 60,
+                width: 170,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Color.fromRGBO(31, 122, 140, 1.0),
+                ),
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => home_Screen()));
+                  },
+                  child: Text(
+                    'Confirm',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.white),
+                  ),
                 ),
               ),
-            ),
             Expanded(
               child: SizedBox(
                 height: 50,
@@ -162,4 +197,30 @@ class _attendance_pageState extends State<attendance_page> {
       ),
     );
   }
+
+  void _fingerPrintLogin() async {
+    bool isFingerPrintEnabled = await _fingerPrint.isFingerPrintEnabled();
+    if (isFingerPrintEnabled) {
+      bool isAuth = await _fingerPrint.isAuth("Login Fingerprint");
+      if (isAuth) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+            'FingerPrint Logged Successfully',
+            textAlign: TextAlign.center,
+          )),
+        );
+      }
+      else{
+         ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+            'Wrong FingerPrint',
+            textAlign: TextAlign.center,
+          )),
+        );
+      }
+    }
+  }
 }
+

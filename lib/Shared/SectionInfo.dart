@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gallery_saver/gallery_saver.dart';
+import 'package:http/http.dart' as http;
 
 class SectionInfo extends StatelessWidget {
-  const SectionInfo({super.key});
+  SectionInfo({super.key});
+  var path = 'assetss/icons8-qr-code-64.png';
+  var album_name = 'QR-Codes';
+  void saveImage() async {
+    await GallerySaver.saveImage(path, albumName: album_name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,39 +120,73 @@ class SectionInfo extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Number of Attendees',
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Download this QR-Code',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Color.fromRGBO(10, 63, 79, 1.0),
-                                  )),
-                              content: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'Enter Number',
+                                    color: Color(0xFF0A3F4F),
+                                  ),
                                 ),
-                              ),
-                              actions: [
-                                TextButton(
+                                IconButton(
+                                  icon: Icon(Icons.close),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('Ok'),
                                 ),
                               ],
-                            );
-                          },
-                        );
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        child: Image.asset(
-                          "assetss/icons8-people-100.png",
-                        ),
-                      )),
+                            ),
+                            content: Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        'assetss/icons8-qr-code-64.png'),
+                                    fit: BoxFit.contain),
+                              ),
+                            ),
+                            actions: [
+                              Center(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    saveImage();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                        'Downloaded to Gallery',
+                                        textAlign: TextAlign.center,
+                                      )),
+                                    );
+                                  },
+                                  child: const Text('Download'),
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            petroleum),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      child: Image.asset(
+                        "assetss/QR.png",
+                      ),
+                    ),
+                  ),
                 ],
               ),
             )

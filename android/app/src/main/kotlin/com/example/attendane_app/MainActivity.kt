@@ -1,6 +1,7 @@
 package com.example.attendane_app
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-import io.flutter.embedding.android.FlutterActivity
+  class MainActivity: FlutterFragmentActivity() {
+    
+  }
 
-class MainActivity: FlutterActivity() {
-}

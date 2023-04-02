@@ -1,4 +1,6 @@
 import 'package:attendane_app/home_Screen.dart';
+import 'package:attendane_app/lab_absence.dart';
+import 'package:attendane_app/qrcode/readqr.dart';
 import 'package:attendane_app/yourSubjects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -12,7 +14,9 @@ class page_lec extends StatefulWidget {
 }
 
 class _page_lecState extends State<page_lec> {
-  String selectedOption1 = 'Option 1';
+  Text _selectedOption1 = Text('');
+  Text _selectedOption2 = Text('');
+  Text _selectedOption3 = Text('');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +47,9 @@ class _page_lecState extends State<page_lec> {
                             iconSize: MediaQuery.of(context).size.height / 25,
                             onPressed: () {
                               Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => yourSubjects()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => yourSubjects()));
                             },
                             icon: Icon(Icons.arrow_back)),
                       ),
@@ -88,7 +94,7 @@ class _page_lecState extends State<page_lec> {
                 decoration: InputDecoration(
                     hintText: 'Your Name',
                     hintStyle: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height / 30,
+                      fontSize: MediaQuery.of(context).size.height / 40,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -119,7 +125,7 @@ class _page_lecState extends State<page_lec> {
                   decoration: InputDecoration(
                       hintText: 'Your Code',
                       hintStyle: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height / 30,
+                        fontSize: MediaQuery.of(context).size.height / 40,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -137,109 +143,37 @@ class _page_lecState extends State<page_lec> {
               height: MediaQuery.of(context).size.height / 50,
             ),
             Container(
-                padding: EdgeInsets.all(0),
-                margin: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height / 15,
-                width: 400,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(31, 122, 140, 1.0),
-                ),
-                child: DropdownButton(
-                  items: [
-                    'Option 1',
-                    'Option 2',
-                    'Option 3',
-                    'Option 4',
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
+              height: MediaQuery.of(context).size.height / 15,
+              width: MediaQuery.of(context).size.height / 4.9,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(31, 122, 140, 1.0),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Row(
+                children: [
+                  MaterialButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (ctx) => ScanScreen()));
+                        print('Read qr code');
+                      },
                       child: Text(
-                        value,
-                        style:
-                            TextStyle(color: Color.fromRGBO(31, 122, 140, 1.0)),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedOption1 = newValue!;
-                    });
-                  },
-                  value: selectedOption1,
-                  icon: Padding(
-                      //Icon at tail, arrow bottom is default icon
-                      padding: EdgeInsets.only(
-                        right: 20,
-                        top: MediaQuery.of(context).size.height / 95,
-                      ),
-                      child: Icon(Icons.arrow_drop_down_circle_rounded)),
-                  iconSize: MediaQuery.of(context).size.height / 20,
-                  iconEnabledColor: Colors.white, //Icon color
-                  style: TextStyle(
-                    //te
-                    color: Colors.white, //Font color
-                    fontSize: MediaQuery.of(context).size.height /
-                        35, //font size on dropdown button
-                  ),
-
-                  dropdownColor: Colors.white, //dropdown background color
-                  underline: Container(), //remove underline
-                  isExpanded: true,
-                  //make true to make width 100%
-                )),
-            SizedBox(height: MediaQuery.of(context).size.height / 50),
-            Container(
-                padding: EdgeInsets.all(0),
-                margin: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height / 15,
-                width: 400,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color.fromRGBO(31, 122, 140, 1.0),
-                ),
-                child: DropdownButton(
-                  items: [
-                    'Option 1',
-                    'Option 2',
-                    'Option 3',
-                    'Option 4',
-                  ].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style:
-                            TextStyle(color: Color.fromRGBO(31, 122, 140, 1.0)),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedOption1 = newValue!;
-                    });
-                  },
-                  value: selectedOption1,
-                  icon: Padding(
-                      //Icon at tail, arrow bottom is default icon
-                      padding: EdgeInsets.only(
-                        right: 20,
-                        top: MediaQuery.of(context).size.height / 95,
-                      ),
-                      child: Icon(Icons.arrow_drop_down_circle_rounded)),
-                  iconSize: MediaQuery.of(context).size.height / 20,
-                  iconEnabledColor: Colors.white, //Icon color
-                  style: TextStyle(
-                      //te
-                      color: Colors.white, //Font color
-                      fontSize: 20 //font size on dropdown button
-                      ),
-
-                  dropdownColor: Colors.white, //dropdown background color
-                  underline: Container(), //remove underline
-                  isExpanded: true,
-                  //make true to make width 100%
-                )),
+                        'Scan QR code',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height / 50,
+                        ),
+                      )),
+                  Container(
+                      child: Icon(
+                    Icons.qr_code_2,
+                    color: Colors.white,
+                    size: MediaQuery.of(context).size.height / 30,
+                  ))
+                ],
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 5),
             Padding(
               padding: const EdgeInsets.only(top: 5),
               child: Expanded(
@@ -256,10 +190,12 @@ class _page_lecState extends State<page_lec> {
                 color: Color.fromRGBO(31, 122, 140, 1.0),
               ),
               child: MaterialButton(
-                onPressed: () {Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => yourSubjects()),
-                      );},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => yourSubjects()),
+                  );
+                },
                 child: Text(
                   'confirm',
                   style: TextStyle(
