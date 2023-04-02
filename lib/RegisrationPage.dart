@@ -1,4 +1,4 @@
-import 'package:attendane_app/register_schedule.dart';
+import 'package:attendane_app/register_schedule.dart' show register_schedule;
 import 'package:attendane_app/start_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';

@@ -42,7 +42,9 @@ class _tabel_secState extends State<tabel_sec> {
                             iconSize: MediaQuery.of(context).size.height / 25,
                             onPressed: () {
                               Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => page_lec()));
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Absence()));
                             },
                             icon: Icon(Icons.arrow_back)),
                       ),
@@ -70,10 +72,10 @@ class _tabel_secState extends State<tabel_sec> {
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                     padding: EdgeInsets.all(
-                      MediaQuery.of(context).size.height / 150,
+                      MediaQuery.of(context).size.height / 120,
                     ),
                     margin: EdgeInsets.all(
-                      MediaQuery.of(context).size.height / 100,
+                      MediaQuery.of(context).size.height / 80,
                     ),
                     height: MediaQuery.of(context).size.height / 20,
                     width: MediaQuery.of(context).size.height / 5.4,
@@ -84,12 +86,13 @@ class _tabel_secState extends State<tabel_sec> {
                     child: Text(
                       '   Year_name',
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 6, 19, 34)),
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-                  InkWell(
+                InkWell(
                   child: Container(
                     padding: EdgeInsets.all(
                       MediaQuery.of(context).size.height / 150,
@@ -106,8 +109,9 @@ class _tabel_secState extends State<tabel_sec> {
                     child: Text(
                       ' Section_name',
                       style: TextStyle(
-                          fontSize:20,
-                          color: Color.fromARGB(255, 6, 19, 34)),
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -130,21 +134,34 @@ class _tabel_secState extends State<tabel_sec> {
                     TableRow(children: [
                       Column(children: [
                         Container(
+                          width: double.infinity,
+                          color: Color.fromRGBO(31, 122, 140, 1.0),
                           height: MediaQuery.of(context).size.height / 15,
-                          padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height / 60,
+                          //
+                          child: Center(
+                            child: Text('Name',
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold)),
                           ),
-                          child: Text('Name',
-                              style: TextStyle(
-                                  fontSize: 22,color: Color(0xff0a3f4f),
-                                  fontWeight: FontWeight.bold)),
                         )
                       ]),
                       Column(children: [
-                        Text('Action',
-                            style: TextStyle(color: Color(0xff0a3f4f),
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold),)
+                        Container(
+                          width: double.infinity,
+                          color: Color.fromRGBO(31, 122, 140, 1.0),
+                          height: MediaQuery.of(context).size.height / 15,
+                          child: Center(
+                            child: Text(
+                              'Action',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )
                       ]),
                     ]),
                     TableRow(children: [

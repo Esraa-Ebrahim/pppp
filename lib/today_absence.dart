@@ -1,4 +1,6 @@
+import 'package:attendane_app/home_Screen.dart';
 import 'package:attendane_app/tabel_sec.dart';
+import 'package:attendane_app/yourSubjects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -26,13 +28,33 @@ class _AbsenceState extends State<Absence> {
               height: MediaQuery.of(context).size.height / 10,
               width: double.infinity,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.height / 20,
+                    ),
+                    height: MediaQuery.of(context).size.height / 15,
+                    width: MediaQuery.of(context).size.height / 10,
+                    child: CircleAvatar(
+                      backgroundColor: Color.fromRGBO(31, 122, 140, 1.0),
+                      child: IconButton(
+                          color: Colors.white,
+                          iconSize: MediaQuery.of(context).size.height / 25,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => home_Screen()));
+                          },
+                          icon: Icon(Icons.arrow_back)),
+                    ),
+                  ),
                   Container(
                     height: MediaQuery.of(context).size.height / 10,
                     width: MediaQuery.of(context).size.width / 2.5,
                     margin: EdgeInsets.only(
-                      top: 15.0,
+                      top: MediaQuery.of(context).size.height / 50,
                     ),
                     child: Image.asset(
                       "assetss/حضرني.png",
@@ -56,11 +78,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -68,7 +93,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -91,11 +116,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -103,7 +131,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -126,11 +154,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -138,7 +169,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -161,11 +192,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -173,7 +207,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -196,11 +230,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -208,7 +245,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -231,11 +268,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -243,7 +283,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -266,11 +306,14 @@ class _AbsenceState extends State<Absence> {
                     color: Color.fromRGBO(31, 122, 140, 1.0),
                   ),
                   child: MaterialButton(
-                    onPressed: () {            Navigator.push(context,
-          MaterialPageRoute(builder: (context) => tabel_sec()),
-        );},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => tabel_sec()),
+                      );
+                    },
                     child: Container(
-                      padding: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 7),
                       margin: EdgeInsets.all(10),
                       height: MediaQuery.of(context).size.height / 15,
                       width: MediaQuery.of(context).size.height / 2.2,
@@ -278,7 +321,7 @@ class _AbsenceState extends State<Absence> {
                         'year/sectionNumber                        xx/xx/xxxx',
                         style: TextStyle(
                           fontSize: 16,
-                          color: Color.fromARGB(255, 3, 24, 52),
+                          color: Colors.white,
                         ),
                       ),
                     ),
