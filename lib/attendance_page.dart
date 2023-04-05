@@ -3,6 +3,7 @@ import 'home_Screen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:attendane_app/services/finger_print.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class attendance_page extends StatefulWidget {
   const attendance_page({Key? key}) : super(key: key);
@@ -17,8 +18,9 @@ class _attendance_pageState extends State<attendance_page> {
   final double collegeLongitude = 31.52454322320364; // خط الطول للكلية
   final double maxDistance = 500.0; // المسافة القصوى بين موقع المستخدم وموقع الكلية بالأمتار
 
+  bool isFingerprintAuthenticated = false;
+  bool isLocationDetermined = false;
   bool _isPresent = false;
-  String _locationStatus = "";
 
   @override
   void initState() {
@@ -38,13 +40,41 @@ class _attendance_pageState extends State<attendance_page> {
     if(distanceInMeters <= 500){
       print("attended");
       _isPresent = true;
+      isLocationDetermined = true;
     }else{
+      isLocationDetermined = false;
       _isPresent = false;
       print("not attended");
       print(position.longitude);
       print(position.latitude);
     }
         }
+  void checkFingerprintAndLocation() {
+  if (isFingerprintAuthenticated && isLocationDetermined) {
+  Fluttertoast.showToast(
+  msg: "تم تسجيل حضورك بنجاح!",
+  toastLength: Toast.LENGTH_LONG,
+  gravity: ToastGravity.TOP,
+  timeInSecForIosWeb: 5,
+  backgroundColor: Color(0xff0a3f4f),
+  textColor: Colors.white,
+  fontSize: 20.0
+  );
+  }
+  else{
+    Fluttertoast.showToast(
+        msg: "لم يتم تسجيل حضورك بعد!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.TOP,
+        timeInSecForIosWeb: 5,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 20.0
+    );
+
+  }
+  }
+
 
   final FingerPrint _fingerPrint = FingerPrint();
   final FlutterSecureStorage _flutterSecureStorage = FlutterSecureStorage(
@@ -165,7 +195,7 @@ class _attendance_pageState extends State<attendance_page> {
             SizedBox(
               height: screenHeight * 0.1,
             ),
-            if (fprint.isNotEmpty)
+           // if (fprint.isNotEmpty)
               Container(
                 height: 60,
                 width: 170,
@@ -175,6 +205,7 @@ class _attendance_pageState extends State<attendance_page> {
                 ),
                 child: MaterialButton(
                   onPressed: () {
+                    checkFingerprintAndLocation();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => home_Screen()));
                   },
@@ -203,6 +234,7 @@ class _attendance_pageState extends State<attendance_page> {
     if (isFingerPrintEnabled) {
       bool isAuth = await _fingerPrint.isAuth("Login Fingerprint");
       if (isAuth) {
+        isFingerprintAuthenticated = true;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text(
@@ -212,6 +244,7 @@ class _attendance_pageState extends State<attendance_page> {
         );
       }
       else{
+        isFingerprintAuthenticated = false;
          ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text(
