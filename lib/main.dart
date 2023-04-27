@@ -1,10 +1,18 @@
+import 'package:attendane_app/services/remote/dio_helper.dart';
 import 'package:attendane_app/splash_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart";
 import 'package:responsive_framework/responsive_framework.dart';
 //import 'package:hex-color/hexcolor.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await DioHelper.init();
+
+  
+
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   builder:
@@ -14,11 +22,11 @@ void main() {
         minWidth: 480,
         defaultScale: true,
         breakpoints: [
-          ResponsiveBreakpoint.autoScale(480, name: 'SM'),
-          ResponsiveBreakpoint.autoScale(800, name: 'MD'),
-          ResponsiveBreakpoint.autoScale(1000, name: 'LG'),
-          ResponsiveBreakpoint.autoScale(1200, name: 'XL'),
-          ResponsiveBreakpoint.autoScale(2460, name: '2XL'),
+          const ResponsiveBreakpoint.autoScale(480, name: 'SM'),
+          const ResponsiveBreakpoint.autoScale(800, name: 'MD'),
+          const ResponsiveBreakpoint.autoScale(1000, name: 'LG'),
+          const ResponsiveBreakpoint.autoScale(1200, name: 'XL'),
+          const ResponsiveBreakpoint.autoScale(2460, name: '2XL'),
         ],
       );
 }
@@ -28,7 +36,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: splashScreen(),
     );

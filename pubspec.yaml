@@ -48,6 +48,7 @@ dependencies:
   barcode_widget: ^2.0.3
   flutter_secure_storage: ^8.0.0
   fluttertoast: ^8.2.1
+  dio:
 
 dev_dependencies:
   flutter_test:
