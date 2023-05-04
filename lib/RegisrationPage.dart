@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
 
@@ -16,14 +15,13 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-
-  var selectedValue1 =1;
-  var selectedValue2 =1;
-  var selectedValue3 =1;
-  var selectedValue4 =1;
-  var selectedValue5 =1;
-  var selectedValue6 =1;
-  var selectedValue7 =1;
+  var selectedValue1 = 1;
+  var selectedValue2 = 1;
+  var selectedValue3 = 1;
+  var selectedValue4 = 1;
+  var selectedValue5 = 1;
+  var selectedValue6 = 1;
+  var selectedValue7 = 1;
   int selectedValue = 1;
 
   ImagePicker picker = ImagePicker();
@@ -257,7 +255,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
@@ -296,14 +293,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
           // enabled: false,
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-            //      suffixText: 'choose file',
+              //      suffixText: 'choose file',
               suffixIcon: IconButton(
                 icon: Icon(Icons.image, color: Color(0xff1f7a8c)),
                 onPressed: () async {
                   image = await picker.pickImage(source: ImageSource.gallery);
-                  image == null ? Container() :
-                  Image.file(File(image!.path));
-                  setState(() {},);
+                  image == null ? Container() : Image.file(File(image!.path));
+                  setState(
+                    () {},
+                  );
                 },
               ),
               filled: true,
@@ -318,48 +316,58 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-        image == null ? Container() :
-        Image.file(File(image!.path)),
+        image == null ? Container() : Image.file(File(image!.path)),
         SizedBox(
           height: 10,
         ),
         TextField(
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
+              suffixIcon: DropdownButton(
                   icon: Icon(Icons.arrow_drop_down_circle_rounded,
                       color: Color(0xff1f7a8c)),
                   value: selectedValue2,
                   items: const [
                     DropdownMenuItem(
-                      child: Text("CS  ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "CS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "IS  ", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
+                        "IS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
+                      value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text("IT  ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "IT  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 3,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "DS  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "DS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 4,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "MI  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "MI  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 5,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "AI  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "AI  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 6,
                     ),
                   ],

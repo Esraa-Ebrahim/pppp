@@ -1,7 +1,6 @@
 import 'package:attendane_app/Shared/end_points.dart';
 import 'package:dio/dio.dart';
 
-
 class DioHelper {
   static late Dio dio;
 
@@ -30,12 +29,11 @@ class DioHelper {
     return await dio.post(url, queryParameters: query, data: data);
   }
 
-  static Future<Response> putData({required String url,required data}) async {
-    return await dio.put(url,data: data);
+  static Future<Response> putData({required String url, required data}) async {
+    return await dio.put(url, data: data);
   }
 
-  static Future<Response> deleteData({required url,data})async{
-    return dio.delete(url,data: data);
+  static Future<Response> deleteData({required url, data}) async {
+    return dio.delete(url, data: data);
   }
 }
-

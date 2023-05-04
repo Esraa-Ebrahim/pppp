@@ -11,10 +11,10 @@ Future<void> _determinePosition() async {
     //collegeLatitude,
     //collegeLongitude,
   );
-  if(distanceInMeters <= 500){
+  if (distanceInMeters <= 500) {
     print("attended");
     //_isPresent = true;
-  }else{
+  } else {
     //_isPresent = false;
     print("not attended");
     print(position.longitude);
