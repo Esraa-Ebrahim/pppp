@@ -1,3 +1,4 @@
+import 'package:attendane_app/login_student.dart';
 import 'package:attendane_app/services/remote/dio_helper.dart';
 import 'package:attendane_app/splash_screen.dart';
 import 'package:dio/dio.dart';
@@ -6,12 +7,10 @@ import "package:flutter/services.dart";
 import 'package:responsive_framework/responsive_framework.dart';
 //import 'package:hex-color/hexcolor.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await DioHelper.init();
-
-  
 
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -36,9 +35,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: splashScreen(),
+      home: login_student(),
     );
   }
 }

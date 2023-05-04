@@ -3,36 +3,36 @@ import 'package:attendane_app/start_screen.dart';
 import 'package:attendane_app/yourSubjects.dart';
 import 'package:flutter/material.dart';
 
-class login_student extends StatefulWidget{
-  login_student ({Key? key, this.title}) : super(key: key);
+class login_student extends StatefulWidget {
+  login_student({Key? key, this.title}) : super(key: key);
   Color c1 = const Color(0x4F000A3F);
   final String? title;
   @override
   _login_studentState createState() => _login_studentState();
 }
+
 class _login_studentState extends State<login_student> {
   int selectedValue = 1;
+  final _globalKey = GlobalKey<FormState>();
 
   Widget _backButton() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            backgroundColor: const Color(0xFF1f7a8c),
-            radius: 25.0,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: Colors.white,
-                size: 35.0,
-              ),
-              onPressed: (){
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => start_Screen()));
-              },
-            ),
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      CircleAvatar(
+        backgroundColor: const Color(0xFF1f7a8c),
+        radius: 25.0,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.white,
+            size: 35.0,
           ),
-        ]);
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => start_Screen()));
+          },
+        ),
+      ),
+    ]);
   }
 
   Widget _submitButton() {
@@ -47,8 +47,10 @@ class _login_studentState extends State<login_student> {
           backgroundColor: const Color(0xff1F7A8C),
         ),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => yourSubjects()));
+          if (_globalKey.currentState!.validate()) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => yourSubjects()));
+          }
         },
         child: const Text(
           'Confirm',
@@ -59,14 +61,13 @@ class _login_studentState extends State<login_student> {
         ),
       ),
     );
-
   }
 
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>  register_student()));
+            MaterialPageRoute(builder: (context) => register_student()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 0),
@@ -77,7 +78,11 @@ class _login_studentState extends State<login_student> {
           children: <Widget>[
             Text(
               'Don\'t have an account ?',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600,color: Color(0xff0a3f4f),),
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff0a3f4f),
+              ),
             ),
             SizedBox(
               width: 10,
@@ -94,6 +99,7 @@ class _login_studentState extends State<login_student> {
       ),
     );
   }
+
   Widget _title() {
     return Container(
       child: Image.asset('assetss/loginnow.png'),
@@ -109,7 +115,14 @@ class _login_studentState extends State<login_student> {
   Widget _academycode() {
     return Column(
       children: <Widget>[
-        TextField(
+        TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Student name must not be empty";
+            } else if (value.length < 3) {
+              return "Student name must be at least 3 characters";
+            }
+          },
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
               filled: true,
@@ -123,12 +136,17 @@ class _login_studentState extends State<login_student> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
-
-        TextField(
+        TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Academy code must not be empty";
+            } else if (value.length != 14) {
+              return "Academy code must be 14 numbers";
+            }
+          },
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
               filled: true,
@@ -142,48 +160,56 @@ class _login_studentState extends State<login_student> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        height: height,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              top: -height * .15,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: Container(),
-            ),
-            // child: BezierContainer()),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height * .1),
-                    _backButton(),
-                    _sizedbox2(),
-                    _title(),
-                    _sizedbox2(),
-                    _academycode(),
-                    _sizedbox2(),
-                    _submitButton(),
-                    _createAccountLabel(),
-                  ],
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          height: height,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: -height * .15,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: Container(),
+              ),
+              // child: BezierContainer()),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _globalKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .1),
+                        _backButton(),
+                        _sizedbox2(),
+                        _title(),
+                        _sizedbox2(),
+                        _academycode(),
+                        _sizedbox2(),
+                        _submitButton(),
+                        _createAccountLabel(),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

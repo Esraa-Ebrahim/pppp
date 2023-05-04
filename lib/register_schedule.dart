@@ -1,25 +1,24 @@
-
 import 'package:attendane_app/home1.dart';
 import 'package:attendane_app/home_Screen.dart';
 import 'package:attendane_app/RegisrationPage.dart';
 import 'package:flutter/material.dart';
 
-class register_schedule extends StatefulWidget{
-  register_schedule ({Key? key, this.title}) : super(key: key);
+class register_schedule extends StatefulWidget {
+  register_schedule({Key? key, this.title}) : super(key: key);
   Color c1 = const Color(0x4F000A3F);
   final String? title;
   @override
   _register_scheduleState createState() => _register_scheduleState();
 }
-class _register_scheduleState extends State<register_schedule> {
-  var selectedValue1 =1;
-  var selectedValue2 =1;
-  var selectedValue3 =1;
-  var selectedValue4 =1;
-  var selectedValue5 =1;
-  var selectedValue6 =1;
-  var selectedValue7 =1;
 
+class _register_scheduleState extends State<register_schedule> {
+  var selectedValue1 = 1;
+  var selectedValue2 = 1;
+  var selectedValue3 = 1;
+  var selectedValue4 = 1;
+  var selectedValue5 = 1;
+  var selectedValue6 = 1;
+  var selectedValue7 = 1;
 
   Widget _submitButton() {
     return Container(
@@ -28,57 +27,57 @@ class _register_scheduleState extends State<register_schedule> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //  crossAxisAlignment: CrossAxisAlignment.center,
-        children:<Widget>[
-     Container(
-     height:50 ,
-     child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          backgroundColor: const Color(0xff1F7A8C),
-        ),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => register_schedule()));
-        },
-        child: const Text(
-          '   Add   ',
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-          ),
-        ),
-      ),
-          ),
-      Container(
-        height:50 ,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+        //  crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            height: 50,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                backgroundColor: const Color(0xff1F7A8C),
               ),
-              backgroundColor: const Color(0xff1F7A8C),
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => home_Screen()));
-            },
-            child: const Text(
-              'Confirm',
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.white,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => register_schedule()));
+              },
+              child: const Text(
+                '   Add   ',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-      ),
-
-    ],
+          Container(
+            height: 50,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                backgroundColor: const Color(0xff1F7A8C),
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => home_Screen()));
+              },
+              child: const Text(
+                'Confirm',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
-
   }
 
   Widget _divider() {
@@ -121,7 +120,7 @@ class _register_scheduleState extends State<register_schedule> {
   }
 
   Widget _backbutton() {
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CircleAvatar(
@@ -133,9 +132,9 @@ class _register_scheduleState extends State<register_schedule> {
               color: Colors.white,
               size: 35.0,
             ),
-            onPressed: (){
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => RegistrationPage()));
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RegistrationPage()));
             },
           ),
         ),
@@ -163,24 +162,26 @@ class _register_scheduleState extends State<register_schedule> {
     return Column(
       children: <Widget>[
         TextField(
-
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
-                  icon: Icon(Icons.arrow_drop_down_circle_rounded,size: 25,
-                      color: Color(0xff1f7a8c)),
+              suffixIcon: DropdownButton(
+                  icon: Icon(Icons.arrow_drop_down_circle_rounded,
+                      size: 25, color: Color(0xff1f7a8c)),
                   value: selectedValue1,
                   items: [
                     DropdownMenuItem(
-                      child: Text("1   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "1   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "2", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
+                        "2",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
+                      value: 2,
                     ),
                   ],
                   onChanged: (value) {
@@ -199,38 +200,43 @@ class _register_scheduleState extends State<register_schedule> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
+              suffixIcon: DropdownButton(
                   icon: Icon(Icons.arrow_drop_down_circle_rounded,
                       color: Color(0xff1f7a8c)),
                   value: selectedValue2,
                   items: const [
                     DropdownMenuItem(
-                      child: Text("CS  ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "CS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "IS  ", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
+                        "IS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
+                      value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text("IT  ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "IT  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 3,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "DS  ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "DS  ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 4,
                     ),
                   ],
@@ -250,38 +256,43 @@ class _register_scheduleState extends State<register_schedule> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
+              suffixIcon: DropdownButton(
                   icon: Icon(Icons.arrow_drop_down_circle_rounded,
                       color: Color(0xff1f7a8c)),
                   value: selectedValue3,
                   items: const [
                     DropdownMenuItem(
-                      child: Text("1   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "1   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "2", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
+                        "2",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
+                      value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text("3   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "3   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 3,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "4   ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "4   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 4,
                     ),
                   ],
@@ -301,56 +312,67 @@ class _register_scheduleState extends State<register_schedule> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
+              suffixIcon: DropdownButton(
                   icon: Icon(Icons.arrow_drop_down_circle_rounded,
                       color: Color(0xff1f7a8c)),
                   value: selectedValue4,
                   items: const [
-                   DropdownMenuItem(
-                      child: Text("subject 1 ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                    DropdownMenuItem(
+                      child: Text(
+                        "subject 1 ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "subject 2 ", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
+                        "subject 2 ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
+                      value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text("subject 3",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "subject 3",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 3,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "subject 4 ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "subject 4 ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 4,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "subject 5 ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "subject 5 ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 5,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "subject 6 ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "subject 6 ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 6,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "subject 7 ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "subject 7 ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 7,
                     ),
-                 ],
+                  ],
                   onChanged: (value) {
                     setState(() {
                       selectedValue4 = value!;
@@ -367,47 +389,57 @@ class _register_scheduleState extends State<register_schedule> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
         TextField(
           keyboardType: TextInputType.none,
           decoration: InputDecoration(
-              suffixIcon:
-              DropdownButton(
+              suffixIcon: DropdownButton(
                   icon: Icon(Icons.arrow_drop_down_circle_rounded,
                       color: Color(0xff1f7a8c)),
                   value: selectedValue6,
                   items: const [
                     DropdownMenuItem(
-                      child: Text("1   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "1   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "2", style: TextStyle(color: Color(0xff0a3f4f)),),
-                      value: 2   ,
+                        "2",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
+                      value: 2,
                     ),
                     DropdownMenuItem(
-                      child: Text("3   ",
-                        style: TextStyle(color: Color(0xff0a3f4f)),),
+                      child: Text(
+                        "3   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 3,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "4   ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "4   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 4,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "5   ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "5   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 5,
                     ),
                     DropdownMenuItem(
                       child: Text(
-                        "6   ", style: TextStyle(color: Color(0xff0a3f4f)),),
+                        "6   ",
+                        style: TextStyle(color: Color(0xff0a3f4f)),
+                      ),
                       value: 6,
                     ),
                   ],
@@ -430,7 +462,6 @@ class _register_scheduleState extends State<register_schedule> {
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
@@ -465,6 +496,7 @@ class _register_scheduleState extends State<register_schedule> {
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -483,8 +515,8 @@ class _register_scheduleState extends State<register_schedule> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * 0.06),
                     _backbutton(),

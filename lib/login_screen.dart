@@ -14,29 +14,25 @@ class login_screen extends StatefulWidget {
 }
 
 class _login_screenState extends State<login_screen> {
-
   Widget _backButton() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            backgroundColor: const Color(0xFF1f7a8c),
-            radius: 25.0,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back_rounded,
-                color: Colors.white,
-                size: 35.0,
-              ),
-              onPressed: (){
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => start_Screen()));
-              },
-            ),
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      CircleAvatar(
+        backgroundColor: const Color(0xFF1f7a8c),
+        radius: 25.0,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.white,
+            size: 35.0,
           ),
-        ]);
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => start_Screen()));
+          },
+        ),
+      ),
+    ]);
   }
-
 
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(
@@ -86,9 +82,7 @@ class _login_screenState extends State<login_screen> {
         ),
       ),
     );
-
   }
-
 
   Widget _divider() {
     return Container(
@@ -126,8 +120,8 @@ class _login_screenState extends State<login_screen> {
   Widget _registerAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => RegistrationPage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RegistrationPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 25),
@@ -137,7 +131,10 @@ class _login_screenState extends State<login_screen> {
           children: <Widget>[
             const Text(
               'No account?',
-              style: TextStyle(color: Color(0xff0a3f4f), fontSize: 15, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Color(0xff0a3f4f),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600),
             ),
             const SizedBox(
               width: 10,
@@ -159,7 +156,7 @@ class _login_screenState extends State<login_screen> {
     return InkWell(
       onTap: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>  RegistrationPage()));
+            MaterialPageRoute(builder: (context) => RegistrationPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -196,44 +193,45 @@ class _login_screenState extends State<login_screen> {
     );
   }
 
-   Widget _emailPasswordWidget() {
-      return Column(
-        children: <Widget>[
-      TextField(
-      keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-            filled: true,
-            fillColor: Color(0xffededed),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            hintText: '  Your Name',
-            hintStyle: TextStyle(
-              color: Color(0xff0a3f4f),
-            )),
-      ),
-    SizedBox(
-    height: 25,),
-
-          TextField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Color(0xffededed),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                hintText: '  National ID: 14 Number',
-                hintStyle: TextStyle(
-                  color: Color(0xff0a3f4f),
-                )),
-          ),
-          SizedBox(
-            height: 50,),
-     ],
-      );
+  Widget _emailPasswordWidget() {
+    return Column(
+      children: <Widget>[
+        TextField(
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  Your Name',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
+        ),
+        SizedBox(
+          height: 25,
+        ),
+        TextField(
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffededed),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xff01F7A8C), width: 1.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: '  National ID: 14 Number',
+              hintStyle: TextStyle(
+                color: Color(0xff0a3f4f),
+              )),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+      ],
+    );
   }
 
   @override
@@ -241,36 +239,36 @@ class _login_screenState extends State<login_screen> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-          height: height,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: -MediaQuery.of(context).size.height * .15,
-                right: -MediaQuery.of(context).size.width * .4,
-                child: Container(),
-              ),
-              // child: BezierContainer()),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: height * .2),
-                      _title(),
-                      SizedBox(height: 50),
-                      _emailPasswordWidget(),
-                      SizedBox(height: 20),
-                      _submitButton(),
-                      _registerAccountLabel(),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(top: 40, left: 0, child: _backButton()),
-            ],
+      height: height,
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            top: -MediaQuery.of(context).size.height * .15,
+            right: -MediaQuery.of(context).size.width * .4,
+            child: Container(),
           ),
-        ));
+          // child: BezierContainer()),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: height * .2),
+                  _title(),
+                  SizedBox(height: 50),
+                  _emailPasswordWidget(),
+                  SizedBox(height: 20),
+                  _submitButton(),
+                  _registerAccountLabel(),
+                ],
+              ),
+            ),
+          ),
+          Positioned(top: 40, left: 0, child: _backButton()),
+        ],
+      ),
+    ));
   }
 }

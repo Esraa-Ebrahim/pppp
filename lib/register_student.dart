@@ -6,37 +6,36 @@ import 'package:attendane_app/yourSubjects.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';
 
-class register_student extends StatefulWidget{
-  register_student ({Key? key, this.title}) : super(key: key);
+class register_student extends StatefulWidget {
+  register_student({Key? key, this.title}) : super(key: key);
   Color c1 = const Color(0x4F000A3F);
   final String? title;
   @override
   _register_studentState createState() => _register_studentState();
 }
+
 class _register_studentState extends State<register_student> {
   int selectedValue = 1;
 
   Widget _backButton() {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-        CircleAvatar(
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      CircleAvatar(
         backgroundColor: const Color(0xFF1f7a8c),
-         radius: 25.0,
-         child: IconButton(
-         icon: Icon(
-         Icons.arrow_back_rounded,
-         color: Colors.white,
-         size: 35.0,
-    ),
-    onPressed: (){
-    Navigator.push(
-    context, MaterialPageRoute(builder: (context) => start_Screen()));
-    },
-    ),
-    ),
-      ]);
-}
+        radius: 25.0,
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.white,
+            size: 35.0,
+          ),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => start_Screen()));
+          },
+        ),
+      ),
+    ]);
+  }
 
   Widget _submitButton() {
     return Container(
@@ -62,7 +61,6 @@ class _register_studentState extends State<register_student> {
         ),
       ),
     );
-
   }
 
   Widget _loginAccountLabel() {
@@ -79,7 +77,8 @@ class _register_studentState extends State<register_student> {
           children: <Widget>[
             const Text(
               'Already have an account ?',
-              style: TextStyle(color: Color(0xff0a3f4f),
+              style: TextStyle(
+                  color: Color(0xff0a3f4f),
                   fontSize: 15,
                   fontWeight: FontWeight.w600),
             ),
@@ -129,7 +128,6 @@ class _register_studentState extends State<register_student> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
@@ -150,7 +148,6 @@ class _register_studentState extends State<register_student> {
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
@@ -165,11 +162,9 @@ class _register_studentState extends State<register_student> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
-
         TextField(
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
@@ -184,7 +179,6 @@ class _register_studentState extends State<register_student> {
                 color: Color(0xff0a3f4f),
               )),
         ),
-
         SizedBox(
           height: 10,
         ),
@@ -208,40 +202,41 @@ class _register_studentState extends State<register_student> {
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Container(
-          height: height,
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                top: -height * .15,
-                right: -MediaQuery.of(context).size.width * .4,
-                child: Container(),
-              ),
-              // child: BezierContainer()),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: height * .05),
-                      _backButton(),
-                      _title(),
-                      _academycode(),
-                      _submitButton(),
-                      _loginAccountLabel(),
-                    ],
-                  ),
+      body: Container(
+        height: height,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              top: -height * .15,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: Container(),
+            ),
+            // child: BezierContainer()),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: height * .05),
+                    _backButton(),
+                    _title(),
+                    _academycode(),
+                    _submitButton(),
+                    _loginAccountLabel(),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
     );
   }
-  }
+}

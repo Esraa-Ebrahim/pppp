@@ -13,10 +13,10 @@ class attendance_page extends StatefulWidget {
 }
 
 class _attendance_pageState extends State<attendance_page> {
-
   final double collegeLatitude = 30.586811736415804; // خط العرض للكلية
   final double collegeLongitude = 31.52454322320364; // خط الطول للكلية
-  final double maxDistance = 500.0; // المسافة القصوى بين موقع المستخدم وموقع الكلية بالأمتار
+  final double maxDistance =
+      500.0; // المسافة القصوى بين موقع المستخدم وموقع الكلية بالأمتار
 
   bool isFingerprintAuthenticated = false;
   bool isLocationDetermined = false;
@@ -31,50 +31,46 @@ class _attendance_pageState extends State<attendance_page> {
   Future<void> _determinePosition() async {
     Position position = await Geolocator.getCurrentPosition();
 
-      double distanceInMeters = await Geolocator.distanceBetween(
+    double distanceInMeters = await Geolocator.distanceBetween(
       position.latitude,
       position.longitude,
-        collegeLatitude,
-        collegeLongitude,
+      collegeLatitude,
+      collegeLongitude,
     );
-    if(distanceInMeters <= 500){
+    if (distanceInMeters <= 500) {
       print("attended");
       _isPresent = true;
       isLocationDetermined = true;
-    }else{
+    } else {
       isLocationDetermined = false;
       _isPresent = false;
       print("not attended");
       print(position.longitude);
       print(position.latitude);
     }
-        }
+  }
+
   void checkFingerprintAndLocation() {
-  if (isFingerprintAuthenticated && isLocationDetermined) {
-  Fluttertoast.showToast(
-  msg: "تم تسجيل حضورك بنجاح!",
-  toastLength: Toast.LENGTH_LONG,
-  gravity: ToastGravity.TOP,
-  timeInSecForIosWeb: 5,
-  backgroundColor: Color(0xff0a3f4f),
-  textColor: Colors.white,
-  fontSize: 20.0
-  );
+    if (isFingerprintAuthenticated && isLocationDetermined) {
+      Fluttertoast.showToast(
+          msg: "تم تسجيل حضورك بنجاح!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Color(0xff0a3f4f),
+          textColor: Colors.white,
+          fontSize: 20.0);
+    } else {
+      Fluttertoast.showToast(
+          msg: "لم يتم تسجيل حضورك بعد!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 5,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 20.0);
+    }
   }
-  else{
-    Fluttertoast.showToast(
-        msg: "لم يتم تسجيل حضورك بعد!",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.TOP,
-        timeInSecForIosWeb: 5,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 20.0
-    );
-
-  }
-  }
-
 
   final FingerPrint _fingerPrint = FingerPrint();
   final FlutterSecureStorage _flutterSecureStorage = FlutterSecureStorage(
@@ -86,10 +82,10 @@ class _attendance_pageState extends State<attendance_page> {
     setState(() {});
   }
 
-    @override
-    Widget build(BuildContext context) {
-      final screenWidth = MediaQuery.of(context).size.width;
-      final screenHeight = MediaQuery.of(context).size.height;
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -195,29 +191,29 @@ class _attendance_pageState extends State<attendance_page> {
             SizedBox(
               height: screenHeight * 0.1,
             ),
-           // if (fprint.isNotEmpty)
-              Container(
-                height: 60,
-                width: 170,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Color.fromRGBO(31, 122, 140, 1.0),
-                ),
-                child: MaterialButton(
-                  onPressed: () {
-                    checkFingerprintAndLocation();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => home_Screen()));
-                  },
-                  child: Text(
-                    'Confirm',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.white),
-                  ),
+            // if (fprint.isNotEmpty)
+            Container(
+              height: 60,
+              width: 170,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Color.fromRGBO(31, 122, 140, 1.0),
+              ),
+              child: MaterialButton(
+                onPressed: () {
+                  checkFingerprintAndLocation();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => home_Screen()));
+                },
+                child: Text(
+                  'Confirm',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.white),
                 ),
               ),
+            ),
             Expanded(
               child: SizedBox(
                 height: 50,
@@ -242,10 +238,9 @@ class _attendance_pageState extends State<attendance_page> {
             textAlign: TextAlign.center,
           )),
         );
-      }
-      else{
+      } else {
         isFingerprintAuthenticated = false;
-         ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               content: Text(
             'Wrong FingerPrint',
@@ -256,4 +251,3 @@ class _attendance_pageState extends State<attendance_page> {
     }
   }
 }
-

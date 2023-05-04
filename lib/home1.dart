@@ -42,17 +42,17 @@ class _Home1State extends State<Home1> {
                     margin: EdgeInsets.only(right: 5.0),
                     child: Image.asset("assetss/image icon3-01.png"),
                   ),
-
-          Container(
-            height: logoHeight,
-            width: iconWidth,
-            margin: EdgeInsets.only(
-              right: 15.0,
-            ),
-            child: Image.asset(
-              "assetss/حضرني.png",
-            ),
-          ),                ],
+                  Container(
+                    height: logoHeight,
+                    width: iconWidth,
+                    margin: EdgeInsets.only(
+                      right: 15.0,
+                    ),
+                    child: Image.asset(
+                      "assetss/حضرني.png",
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -108,7 +108,7 @@ class _Home1State extends State<Home1> {
                       },
                     ),
                     InkWell(
-                child: Container(
+                      child: Container(
                         height: cardHeight,
                         width: cardWidth,
                         child: Card(
@@ -136,23 +136,20 @@ class _Home1State extends State<Home1> {
                           ),
                         ),
                       ),
-                     onTap: (){
-                       Navigator.push(
-                           context, MaterialPageRoute(builder: (context) => attendance_page()));
-                     },
-                   ),
-                 ],
-                           ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => attendance_page()));
+                      },
+                    ),
+                  ],
+                ),
               ),
-
-
-           ],
-         ),
-
-
+            ],
+          ),
         ],
       ),
     );
   }
-
 }
